@@ -17,10 +17,6 @@ const theme = {
 }
 
 const Stack = createStackNavigator();
-const StyledTouchableOpacity = { marginLeft: SIZES.PADDING };
-const StyledTouchableOpacity2 = { marginRight: SIZES.PADDING };
-const StyledImage = { width: 25, height: 25};
-const StyledImage2 = { width: 30, height: 30};
 
 const App = () => {
   return (
