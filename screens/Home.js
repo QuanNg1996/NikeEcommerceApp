@@ -6,107 +6,60 @@ import { Svg, Polygon } from 'react-native-svg';
 import { BlurView } from '@react-native-community/blur';
 
 const Home = () => {
+  // Dummy data
+  const shoeStoreData = [
+    {
+      id: 0,
+      name: "Grey Nike Shoes",
+      img: images.nikeMetcon4,
+      bgColor: "#414045",
+      type: "TRAINING",
+      price: "$119",
+      sizes: [6, 7, 8]
+    },
+    {
+      id: 1,
+      name: "Sky Nike Shoes",
+      img: images.nikeMetcon6,
+      bgColor: "#4EABA6",
+      type: "TRAINING",
+      price: "$135",
+      sizes: [6, 7, 8, 9, 10, 11]
+    },
+    {
+      id: 2,
+      name: "Purple Nike Shoes",
+      img: images.nikeMetcon5Purple,
+      bgColor: "#2B4660",
+      type: "TRAINING",
+      price: "$124",
+      sizes: [6, 7, 8, 9]
+    },
+    {
+      id: 3,
+      name: "Black & Brown Nike Shoes",
+      img: images.nikeMetcon3,
+      bgColor: "#A69285",
+      type: "TRAINING",
+      price: "$99",
+      sizes: [6, 7, 8, 9, 10, 11, 12, 13]
+    },
+    {
+      id: 4,
+      name: "Red Nike Shoes",
+      img: images.nikeMetconFree,
+      bgColor: "#A02E41",
+      type: "TRAINING",
+      price: "$108",
+      sizes: [6, 7, 8, 9, 10, 11]
+    },  
+  ];  
 
   const [showAddToBagModal, setShowAddToBagModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
-
-  // Dummy Data
-  const [trending, setTrending] = useState([
-    {
-      id: 0,
-      name: "Grey Nike Shoes",
-      img: images.nikeMetcon4,
-      bgColor: "#414045",
-      type: "TRAINING",
-      price: "$119",
-      sizes: [6, 7, 8]
-    },
-    {
-      id: 1,
-      name: "Sky Nike Shoes",
-      img: images.nikeMetcon6,
-      bgColor: "#4EABA6",
-      type: "TRAINING",
-      price: "$135",
-      sizes: [6, 7, 8, 9, 10, 11]
-    },
-    {
-      id: 2,
-      name: "Purple Nike Shoes",
-      img: images.nikeMetcon5Purple,
-      bgColor: "#2B4660",
-      type: "TRAINING",
-      price: "$124",
-      sizes: [6, 7, 8, 9]
-    },
-    {
-      id: 3,
-      name: "Black & Brown Nike Shoes",
-      img: images.nikeMetcon3,
-      bgColor: "#A69285",
-      type: "TRAINING",
-      price: "$99",
-      sizes: [6, 7, 8, 9, 10, 11, 12, 13]
-    },
-    {
-      id: 4,
-      name: "Red Nike Shoes",
-      img: images.nikeMetconFree,
-      bgColor: "#A02E41",
-      type: "TRAINING",
-      price: "$108",
-      sizes: [6, 7, 8, 9, 10, 11]
-    },
-  ]);
-
-  const [recentlyViewed, setRecentlyViewed] = useState([
-    {
-      id: 0,
-      name: "Grey Nike Shoes",
-      img: images.nikeMetcon4,
-      bgColor: "#414045",
-      type: "TRAINING",
-      price: "$119",
-      sizes: [6, 7, 8]
-    },
-    {
-      id: 1,
-      name: "Sky Nike Shoes",
-      img: images.nikeMetcon6,
-      bgColor: "#4EABA6",
-      type: "TRAINING",
-      price: "$135",
-      sizes: [6, 7, 8, 9, 10, 11]
-    },
-    {
-      id: 2,
-      name: "Purple Nike Shoes",
-      img: images.nikeMetcon5Purple,
-      bgColor: "#2B4660",
-      type: "TRAINING",
-      price: "$124",
-      sizes: [6, 7, 8, 9]
-    },
-    {
-      id: 3,
-      name: "Black & Brown Nike Shoes",
-      img: images.nikeMetcon3,
-      bgColor: "#A69285",
-      type: "TRAINING",
-      price: "$99",
-      sizes: [6, 7, 8, 9, 10, 11, 12, 13]
-    },
-    {
-      id: 4,
-      name: "Red Nike Shoes",
-      img: images.nikeMetconFree,
-      bgColor: "#A02E41",
-      type: "TRAINING",
-      price: "$108",
-      sizes: [6, 7, 8, 9, 10, 11]
-    },
-  ]);
+  const [trending, setTrending] = useState(shoeStoreData);
+  const [recentlyViewed, setRecentlyViewed] = useState(shoeStoreData);
 
   const renderTrendingShoes = (item, index) => {
     let trendingStyle = {};

@@ -16,15 +16,13 @@ const theme = {
   }
 }
 
-const Stack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
-      <Stack.Navigator
-        initialRouteName={'Home'}
-      >
-        <Stack.Screen
+      <Navigator initialRouteName={'Home'}>
+        <Screen
           name="Home"
           component={Home}
           options={{
@@ -63,7 +61,7 @@ const App = () => {
             ),
           }}
         />
-      </Stack.Navigator>
+      </Navigator>
     </NavigationContainer>
   )
 }
