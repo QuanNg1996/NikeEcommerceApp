@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Modal } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { images, icons, COLORS, FONTS, SIZES } from '../constants'
+import { images, COLORS, FONTS, SIZES } from '../constants'
 import { Svg, Polygon } from 'react-native-svg';
 import { BlurView } from '@react-native-community/blur';
-
 
 const Home = () => {
 
@@ -16,7 +15,7 @@ const Home = () => {
   const [trending, setTrending] = useState([
     {
       id: 0,
-      name: "Nike Metcon 4",
+      name: "Grey Nike Shoes",
       img: images.nikeMetcon4,
       bgColor: "#414045",
       type: "TRAINING",
@@ -25,7 +24,7 @@ const Home = () => {
     },
     {
       id: 1,
-      name: "Nike Metcon 6",
+      name: "Sky Nike Shoes",
       img: images.nikeMetcon6,
       bgColor: "#4EABA6",
       type: "TRAINING",
@@ -34,7 +33,7 @@ const Home = () => {
     },
     {
       id: 2,
-      name: "Nike Metcon 5",
+      name: "Purple Nike Shoes",
       img: images.nikeMetcon5Purple,
       bgColor: "#2B4660",
       type: "TRAINING",
@@ -43,7 +42,7 @@ const Home = () => {
     },
     {
       id: 3,
-      name: "Nike Metcon 3",
+      name: "Black & Brown Nike Shoes",
       img: images.nikeMetcon3,
       bgColor: "#A69285",
       type: "TRAINING",
@@ -52,7 +51,7 @@ const Home = () => {
     },
     {
       id: 4,
-      name: "Nike Metcon Free",
+      name: "Red Nike Shoes",
       img: images.nikeMetconFree,
       bgColor: "#A02E41",
       type: "TRAINING",
@@ -64,7 +63,7 @@ const Home = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([
     {
       id: 0,
-      name: "Nike Metcon 4",
+      name: "Grey Nike Shoes",
       img: images.nikeMetcon4,
       bgColor: "#414045",
       type: "TRAINING",
@@ -73,7 +72,7 @@ const Home = () => {
     },
     {
       id: 1,
-      name: "Nike Metcon 6",
+      name: "Sky Nike Shoes",
       img: images.nikeMetcon6,
       bgColor: "#4EABA6",
       type: "TRAINING",
@@ -82,12 +81,30 @@ const Home = () => {
     },
     {
       id: 2,
-      name: "Nike Metcon 5",
+      name: "Purple Nike Shoes",
       img: images.nikeMetcon5Purple,
       bgColor: "#2B4660",
       type: "TRAINING",
       price: "$124",
       sizes: [6, 7, 8, 9]
+    },
+    {
+      id: 3,
+      name: "Black & Brown Nike Shoes",
+      img: images.nikeMetcon3,
+      bgColor: "#A69285",
+      type: "TRAINING",
+      price: "$99",
+      sizes: [6, 7, 8, 9, 10, 11, 12, 13]
+    },
+    {
+      id: 4,
+      name: "Red Nike Shoes",
+      img: images.nikeMetconFree,
+      bgColor: "#A02E41",
+      type: "TRAINING",
+      price: "$108",
+      sizes: [6, 7, 8, 9, 10, 11]
     },
   ]);
 
@@ -160,9 +177,11 @@ const Home = () => {
   const renderRecentlyViewed = (item, index) => {
     return (
       <TouchableOpacity
+        key={index}
         style={{ flex: 1, flexDirection: 'row'}}
         onPress={() => {
-          console.log("renderRecentlyViewed");
+          setSelectedItem(item);
+          setShowAddToBagModal(true)
         }}
       >
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -183,16 +202,48 @@ const Home = () => {
     )
   };
 
+  const renderShoeSizes = () => {
+    return (
+      selectedItem.sizes.map((size, index) => {
+        return (
+          <TouchableOpacity
+            key={index}
+            style={{
+              width: 35,
+              height: 25,
+              alignItems: "center",
+              justifyContent: "center",
+              marginHorizontal: 5,
+              marginBottom: 10,
+              borderWidth: 1,
+              borderColor: COLORS.white,
+              borderRadius: 5,
+              backgroundColor: selectedItem.sizes[index] === selectedSize ? COLORS.white : null
+            }}
+            onPress={() => {
+              setSelectedSize(size)
+            }}
+          >
+            <Text style={{ color: selectedItem.sizes[index] === selectedSize ? COLORS.black : COLORS.white, ...FONTS.body4 }}>
+              {size}
+            </Text>
+          </TouchableOpacity>
+        )
+      })
+    )
+  }
+
   return (
     <View style={styles.container}>
       <Text
         style={{ 
           marginTop: SIZES.radius, 
           marginHorizontal: SIZES.padding, 
-          ...FONTS.largeTitleBold 
+          fontWeight: 'bold',
+          ...FONTS.largeTitleBold,
         }}
       >
-          Trending
+        Trending
       </Text>
       <View style={{ height: 260, marginTop: SIZES.radius }}>
         <FlatList 
@@ -240,10 +291,10 @@ const Home = () => {
 
       >
         <BlurView 
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           blurType="light"
           blurAmount={20}
-          reducedTransparencyFallbackColor="#fff"
+          reducedTransparencyFallbackColor={COLORS.white}
         >
           <TouchableOpacity
             style={styles.absolute}
@@ -255,7 +306,7 @@ const Home = () => {
           >     
           </TouchableOpacity>
           <View style={{ justifyContent: "center", width: "85%", backgroundColor: selectedItem.bgColor }}>
-            <View>
+            <View style={{ alignItems: "center", justifyContent: "center", marginTop: -SIZES.padding * 2 }}>
               <Image 
                 source={selectedItem.img}
                 resizeMode="contain"
@@ -271,7 +322,14 @@ const Home = () => {
             <Text style={{ marginTop: SIZES.padding, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body2 }}>{selectedItem.name}</Text>
             <Text style={{ marginTop: SIZES.base / 2, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body3}}>{selectedItem.type}</Text>
             <Text style={{ marginTop: SIZES.radius, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body4  }} >{selectedItem.price}</Text>
-            <Text>Select Size</Text>
+            <View style={{ flexDirection: "row", marginTop: SIZES.radius, marginHorizontal: SIZES.padding }}>
+              <View>
+                <Text style={{ color: COLORS.white, ...FONTS.body3 }}>Select Size</Text>
+              </View>
+              <View style={{ flex: 1, flexWrap: "wrap", flexDirection: "row", marginLeft: SIZES.radius }}>
+                {renderShoeSizes()}
+              </View>
+            </View>
 
             <TouchableOpacity 
               style={{
@@ -281,6 +339,11 @@ const Home = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
+              }}
+              onPress={() => {
+                setSelectedItem(null)
+                setSelectedSize("")
+                setShowAddToBagModal(false)
               }}
             >
               <Text style={{ color: COLORS.white, ...FONTS.largeTitleBold }}>Add to Cart</Text>
