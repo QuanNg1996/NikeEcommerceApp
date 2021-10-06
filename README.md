@@ -1,18 +1,15 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img width="414" alt="Screen Shot 2021-10-06 at 7 02 39 PM" src="https://user-images.githubusercontent.com/53272853/136296348-de6d7c13-8bd5-4420-ac99-0b24ab4ac338.png">
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+<img width="427" alt="Screen Shot 2021-10-06 at 7 02 46 PM" src="https://user-images.githubusercontent.com/53272853/136296353-abd8b323-5cff-4f3c-b515-d7b1fd0d4144.png">
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+<img width="437" alt="Screen Shot 2021-10-06 at 7 03 22 PM" src="https://user-images.githubusercontent.com/53272853/136296358-0f1671c7-e188-489c-b9ca-fb85c0250e89.png">
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+Hello and welcome to the Nike E-commerce store built with React-Native this app is based on this tutorial that I found on youtube.
 
-Use the `BLANK_README.md` to get started.
+Here is the link: https://www.youtube.com/watch?v=R7qK1KKX0rE
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -20,15 +17,6 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [ReactNative.js](https://reactnative.dev)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
