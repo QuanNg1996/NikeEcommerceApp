@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Modal } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images, icons, COLORS, FONTS, SIZES } from '../constants'
 import { Svg, Polygon } from 'react-native-svg';
+import { BlurView } from '@react-native-community/blur';
 
 
 const Home = () => {
+
+  const [showAddToBagModal, setShowAddToBagModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedSize, setSelectedSize] = useState('');
 
   // Dummy Data
   const [trending, setTrending] = useState([
@@ -95,7 +100,17 @@ const Home = () => {
 
     return (
       <TouchableOpacity
-        style={{ height: 240, width: 180, justifyContent: 'center', marginHorizontal: SIZES.base}}
+        style={{ 
+          height: 240, 
+          width: 180, 
+          justifyContent: 'center', 
+          marginHorizontal: SIZES.base, 
+          ...trendingStyle,
+        }}
+        onPress={() => {
+          setSelectedItem(item)
+          setShowAddToBagModal(true)
+        }}
       >
         <Text style={{ color: COLORS.gray, ...FONTS.H5 }}>{item.type}</Text>
         <View style={[{
@@ -161,8 +176,8 @@ const Home = () => {
           />
         </View>
         <View style={{ flex: 1.5, marginLeft: SIZES.radius, justifyContent: "center" }}>
-          <Text>{item.name}</Text>
-          <Text>{item.price}</Text>
+          <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>{item.name}</Text>
+          <Text style={{ ...FONTS.h3 }} >{item.price}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -217,6 +232,63 @@ const Home = () => {
           />
         </View>
       </View>    
+      {selectedItem &&     
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showAddToBagModal}
+
+      >
+        <BlurView 
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+          blurType="light"
+          blurAmount={20}
+          reducedTransparencyFallbackColor="#fff"
+        >
+          <TouchableOpacity
+            style={styles.absolute}
+            onPress={() => {
+              setSelectedItem(null)
+              setSelectedSize("")
+              setShowAddToBagModal(false)
+            }}
+          >     
+          </TouchableOpacity>
+          <View style={{ justifyContent: "center", width: "85%", backgroundColor: selectedItem.bgColor }}>
+            <View>
+              <Image 
+                source={selectedItem.img}
+                resizeMode="contain"
+                style={{
+                  width: "90%",
+                  height: 170,
+                  transform: [
+                    { rotate: "-15deg" }
+                  ]
+                }}
+              />
+            </View>
+            <Text style={{ marginTop: SIZES.padding, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body2 }}>{selectedItem.name}</Text>
+            <Text style={{ marginTop: SIZES.base / 2, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body3}}>{selectedItem.type}</Text>
+            <Text style={{ marginTop: SIZES.radius, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body4  }} >{selectedItem.price}</Text>
+            <Text>Select Size</Text>
+
+            <TouchableOpacity 
+              style={{
+                width: "100%",
+                height: 70,
+                marginTop: SIZES.base,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <Text style={{ color: COLORS.white, ...FONTS.largeTitleBold }}>Add to Cart</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+      }
     </View>
   )
 }
@@ -246,6 +318,13 @@ const styles = StyleSheet.create({
     shadowRadius: 9.51,
     elevation: 15,
   },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  }
 });
 
 export default Home;
